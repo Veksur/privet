@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Collecte de Données</title>
+</head>
+<body>
+    <h1>Bienvenue sur notre site</h1>
+    <p>Merci de visiter notre page.</p>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://example.com/collect-data", true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.send(JSON.stringify({
+                "email": "b89636567@gmail.com",
+                "timestamp": new Date().toISOString()
+            }));
+        });
+    </script>
+</body>
+</html>
